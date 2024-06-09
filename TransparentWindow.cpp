@@ -90,11 +90,11 @@ TransparentWindow::TransparentWindow(Display* display, int posX, int posY, int w
 			unsigned long status;
 		};
 		Atom prop = XInternAtom(_display, "_MOTIF_WM_HINTS", 0);
-		struct MwmHints hints {
+		struct MwmHints mwmHints {
 			.flags = 1L << 1,
 			.decorations = 0
 		};
-		XChangeProperty(_display, window, prop, prop, 32, PropModeReplace, (unsigned char*)&hints, 5);
+		XChangeProperty(_display, window, prop, prop, 32, PropModeReplace, (unsigned char*)&mwmHints, 5);
 	}
 
 	XFree(startupState);
