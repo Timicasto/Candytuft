@@ -138,7 +138,7 @@ void TransparentWindow::bindContext() {
 		Logger::log(Logger::FATAL, "LIFECYCLE-X11", "OpenGL IS NOT SUPPORTED ON CURRENT X SERVER");
 	}
 
-	GLXContext context;
+	GLXContext context = nullptr;
 
 	if (Utils::checkExtension(glXQueryExtensionsString(_display, DefaultScreen(_display)), "GLX_ARB_create_context")) {
 		typedef GLXContext (*glXCreateContextAttribsARBProc)(Display*, GLXFBConfig, GLXContext, Bool, const int*);
@@ -151,7 +151,7 @@ void TransparentWindow::bindContext() {
 
 			int (*oldHandler)(Display*, XErrorEvent*) = XSetErrorHandler(&error);
 
-			context = arbProc(_display, _config, 0, True, attribs);
+			context = arbProc(_display, _config, nullptr, True, attribs);
 			XSync(_display, False);
 			XSetErrorHandler(oldHandler);
 		} else {
@@ -164,7 +164,7 @@ void TransparentWindow::bindContext() {
 	if (!context) {
 		Logger::log(Logger::WARN, "LIFECYCLE-X11", "GL ARB is not supported, falling back to GL");
 
-		context = glXCreateNewContext(_display, _config, GLX_RGBA_TYPE, 0, True);
+		context = glXCreateNewContext(_display, _config, GLX_RGBA_TYPE, nullptr, True);
 		if (!context) {
 			Logger::log(Logger::FATAL, "LIFECYCLE-X11", "GL is not supported too, context creation failed");
 		}
