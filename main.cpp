@@ -1,6 +1,5 @@
-#include <iostream>
+#include "TransparentWindow.hpp"
 
 int main() {
-	std::cout << "Hello, World!" << std::endl;
-	return 0;
+	TransparentWindow window = TransparentWindow(XOpenDisplay(nullptr), 100, 100, 200, 200, "Test", true);
 }

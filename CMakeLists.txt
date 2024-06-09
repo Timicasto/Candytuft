@@ -13,4 +13,4 @@ include_directories(includes)
 add_executable(Candytuft main.cpp
         TransparentWindow.cpp)
 include_directories(${PULSEAUDIO_INCLUDE_DIRS} ${X11_INCLUDE_DIR})
-target_link_libraries(Candytuft GL glfw pulse pulse-simple ${PULSEAUDIO_LIBRARIES} ${X11_LIBRARIES})
+target_link_libraries(Candytuft GL glfw pulse Xrender pulse-simple ${PULSEAUDIO_LIBRARIES} ${X11_LIBRARIES})
