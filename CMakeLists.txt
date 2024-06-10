@@ -26,7 +26,7 @@ IF (CMAKE_SYSTEM_NAME MATCHES "Linux")
     target_link_libraries(Candytuft GL glfw pulse pulse-simple ${CURL_LIBRARIES} Freetype::Freetype)
 ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Windows")
     link_directories(./libs_win64)
-    target_link_libraries(Candytuft glfw3 libglfw3 freetype )
+    target_link_libraries(Candytuft libglfw3dll.a libglfw3.a opengl32 freetype.lib)
     include_directories(./libs_win64/includes)
 ENDIF()
 
