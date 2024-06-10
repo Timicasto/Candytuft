@@ -30,4 +30,4 @@ ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Windows")
     include_directories(./libs_win64/includes)
 ENDIF()
 
-
+configure_file(AlibabaPuHuiTi-2-65-Medium.ttf AlibabaPuHuiTi-2-65-Medium.ttf COPYONLY)
