@@ -107,10 +107,10 @@ size_t FontRenderer::loadFont(const std::string &path, uint32_t mode, int size) 
 	return fonts.size() - 1;
 }
 
-void FontRenderer::render(size_t font, const std::wstring &text, float x, float y, float scale, glm::vec4 color) {
+void FontRenderer::render(size_t font, const std::wstring &text, float x, float y, float scale, glm::vec4 color, glm::mat4 projection) {
 	s.use();
 	s.setVec4f("textColor", color);
-	s.setMat4f("projection", glm::ortho(0.0F, 0.0F, 0.0F, 0.0F));
+	s.setMat4f("projection", projection);
 	glActiveTexture(GL_TEXTURE0);
 	glBindVertexArray(vao);
 

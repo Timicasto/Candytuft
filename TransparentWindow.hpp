@@ -4,7 +4,8 @@
 #include "logger.hpp"
 #include <sstream>
 #include "glad/glad.h"
-
+#include <glm/glm.hpp>
+#include <glm/ext/matrix_clip_space.hpp>
 #include <GLFW/glfw3.h>
 
 class TransparentWindow {
@@ -16,8 +17,11 @@ public:
 
 	[[nodiscard]] GLFWwindow *getWindow() const;
 
+	const glm::mat4 &getProjection() const;
+
 private:
 
+	glm::mat4 projection;
 	GLFWwindow* window;
 	int _width;
 	int _height;
