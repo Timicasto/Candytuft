@@ -1,8 +1,8 @@
 #ifndef CANDYTUFT_RENDERABLECHARACTER_HPP
 #define CANDYTUFT_RENDERABLECHARACTER_HPP
 
-#include <glm/glm.hpp>
 #include "glad/glad.h"
+#include <glm/glm.hpp>
 
 class ivec2;
 

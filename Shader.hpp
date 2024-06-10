@@ -1,11 +1,11 @@
 #ifndef CANDYTUFT_SHADER_HPP
 #define CANDYTUFT_SHADER_HPP
 
+#include "glad/glad.h"
 #include <string>
 #include <glm/vec3.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "glad/glad.h"
 
 class Shader {
 private:

@@ -11,7 +11,9 @@ set(CMAKE_CXX_STANDARD 26)
 
 include_directories(includes)
 
-add_executable(Candytuft main.cpp
+add_executable(Candytuft
+        main.cpp
+        glad.c
         TransparentWindow.cpp
         FontRenderer.cpp
         FontRenderer.hpp
@@ -19,6 +21,6 @@ add_executable(Candytuft main.cpp
         RenderableCharacter.hpp
         Shader.cpp
         Shader.hpp
-        glad.c)
+        )
 include_directories(${PULSEAUDIO_INCLUDE_DIRS} ${X11_INCLUDE_DIR})
 target_link_libraries(Candytuft GL glfw pulse Xrender pulse-simple ${PULSEAUDIO_LIBRARIES} ${X11_LIBRARIES} Freetype::Freetype)
