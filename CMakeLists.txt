@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.28)
 project(Candytuft)
 
-find_package(X11)
 find_package(OpenGL)
 find_package(glfw3)
 find_package(Freetype)
@@ -25,4 +24,4 @@ add_executable(Candytuft
         Hitokoto.hpp
 )
 include_directories(${PULSEAUDIO_INCLUDE_DIRS} ${X11_INCLUDE_DIR} ${CURL_INCLUDE_DIR})
-target_link_libraries(Candytuft GL glfw pulse Xrender pulse-simple ${CURL_LIBRARIES} ${PULSEAUDIO_LIBRARIES} ${X11_LIBRARIES} Freetype::Freetype)
+target_link_libraries(Candytuft GL glfw pulse pulse-simple ${CURL_LIBRARIES} ${PULSEAUDIO_LIBRARIES} Freetype::Freetype)
