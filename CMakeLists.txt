@@ -24,11 +24,12 @@ IF (CMAKE_SYSTEM_NAME MATCHES "Linux")
     find_package(glfw3)
     find_package(Freetype)
     find_package(CURL)
-    include_directories(${PULSEAUDIO_INCLUDE_DIRS} ${CURL_INCLUDE_DIR})
+    include_directories(${CURL_INCLUDE_DIR})
     target_link_libraries(Candytuft GL glfw pulse pulse-simple ${CURL_LIBRARIES} Freetype::Freetype)
 ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Windows")
     link_directories(./libs_win64)
     target_link_libraries(Candytuft glfw3 libglfw3 freetype )
+    include_directories(./libs_win64/includes)
 ENDIF()
 
 
