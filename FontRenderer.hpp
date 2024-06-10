@@ -9,8 +9,8 @@
 #include "RenderableCharacter.hpp"
 #include "Shader.hpp"
 
-static const std::string defVsh = "#version 330 core\nlayout (location = 0) in vec4 vertex;\nout vec2 texCoords;\n\nuniform mat4 projection;\n\nvoid main() {\n    gl_Position = projection * vec4(vertex.xy, 0.0, 1.0);\n    texCoords = vertex.zw;\n}";
-static const std::string defFsh = "#version 330 core\nin vec2 texCoords;\nout vec4 color;\n\nuniform sampler2D text;\nuniform vec4 textColor;\n\nvoid main() {\n    vec4 sampled = vec4(1.0, 1.0, 1.0, texture(text, texCoords).r);\n    color = sampled.w > 0.5 ? (vec4(textColor.xyz, textColor.w * sampled.w)) : vec4(0.0, 0.0, 0.0, 0.0);\n}";
+static const std::string defVsh = "./vsh.vert";
+static const std::string defFsh = "./fsh.frag";
 
 class FontRenderer {
 

@@ -31,3 +31,5 @@ ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Windows")
 ENDIF()
 
 configure_file(AlibabaPuHuiTi-2-65-Medium.ttf AlibabaPuHuiTi-2-65-Medium.ttf COPYONLY)
+configure_file(vsh.vert vsh.vert COPYONLY)
+configure_file(fsh.frag fsh.frag COPYONLY)
