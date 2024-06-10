@@ -3,6 +3,7 @@
 
 #include <string>
 #include <cstring>
+#include <regex>
 
 extern "C" {
 #include <curl/curl.h>
@@ -29,6 +30,14 @@ namespace Utils {
 			curl_easy_cleanup(curl);
 		}
 		return tmp;
+	}
+
+	static std::vector<std::string> split(const std::string& input, const std::string& regex) {
+		std::regex re(regex);
+		std::sregex_token_iterator
+				first{input.begin(), input.end(), re, -1},
+				last;
+		return {first, last};
 	}
 };
 

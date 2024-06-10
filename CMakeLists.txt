@@ -10,13 +10,11 @@ add_executable(Candytuft
         glad.c
         TransparentWindow.cpp
         FontRenderer.cpp
-        FontRenderer.hpp
         RenderableCharacter.cpp
-        RenderableCharacter.hpp
         Shader.cpp
-        Shader.hpp
-        Hitokoto.cpp
-        Hitokoto.hpp
+        modules/Hitokoto.cpp
+        modules/SystemMonitor.cpp
+        modules/SystemMonitor.hpp
 )
 
 IF (CMAKE_SYSTEM_NAME MATCHES "Linux")

@@ -1,7 +1,7 @@
 #ifndef CANDYTUFT_HITOKOTO_HPP
 #define CANDYTUFT_HITOKOTO_HPP
 
-#include "utils.hpp"
+#include "../utils.hpp"
 
 class Hitokoto {
 public:
