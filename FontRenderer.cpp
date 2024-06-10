@@ -48,6 +48,9 @@ size_t FontRenderer::loadFont(const std::string &path, uint32_t mode, int size) 
 		toLoad.emplace_back(0x4E00, 0x9FEA);
 		toLoad.emplace_back(0x3430, 0x4DB5);
 		toLoad.emplace_back(0xF900, 0xFAD9);
+		toLoad.emplace_back(12246, 12352);
+		toLoad.emplace_back(0xFF00, 0xFFEF);
+		toLoad.emplace_back(0x2000, 0x206F);
 	}
 
 	if ((mode >> 7) % 2)  {

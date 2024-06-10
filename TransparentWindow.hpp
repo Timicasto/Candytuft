@@ -17,7 +17,7 @@ public:
 
 	[[nodiscard]] GLFWwindow *getWindow() const;
 
-	const glm::mat4 &getProjection() const;
+	[[nodiscard]] const glm::mat4 &getProjection() const;
 
 private:
 

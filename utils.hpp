@@ -1,33 +1,35 @@
 #ifndef CANDYTUFT_UTILS_HPP
 #define CANDYTUFT_UTILS_HPP
 
+#include <string>
+#include <cstring>
+
+extern "C" {
+#include <curl/curl.h>
+};
+
 namespace Utils {
-		static bool checkExtension(const char *extList, const char *ext) {
-			const char *start, *where, *terminator;
+	static std::string tmp;
 
-			where = strchr(ext, ' ');
-			if (where || *ext == '\0') {
-				return false;
-			}
+	static size_t recv(void* ptr, size_t size, size_t byteSize, void* userPtr) {
+		char* buffer = new char[byteSize];
+		memcpy(buffer, ptr, byteSize);
+		tmp = std::string(buffer);
+		return size * byteSize;
+	}
 
-			for (start = extList;;) {
-				where = strstr(start, ext);
-				if (!where) {
-					break;
-				}
-
-				terminator = where + strlen(ext);
-
-				if (where == start || *(where - 1) == ' ') {
-					if (*terminator == ' ' || *terminator == '\0') {
-						return true;
-					}
-				}
-
-				start = terminator;
-			}
-			return false;
+	static std::string requestNetwork(const std::string& url) {
+		CURL* curl = curl_easy_init();
+		if (curl) {
+			CURLcode ret;
+			curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+			tmp = "";
+			tmp = curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, recv);
+			ret = curl_easy_perform(curl);
+			curl_easy_cleanup(curl);
 		}
+		return tmp;
+	}
 };
 
 #endif //CANDYTUFT_UTILS_HPP
