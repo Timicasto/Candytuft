@@ -8,13 +8,13 @@ Shader::Shader(LoadType src, const std::string &vsh, const std::string &fsh) : i
 
     std::string vCode_str, fCode_str;
     loadShaderSource(vsh, vCode_str, &status);
-    if (!status) {
+    if (status != GL_TRUE) {
         glGetShaderInfoLog(vertex, 512, nullptr, infoLog);
         std::string error = infoLog;
         Logger::log(Logger::ERROR, "Shader", "Failed to load vertex shader due to error: " + error);
     }
     loadShaderSource(fsh, fCode_str, &status);
-    if (!status) {
+    if (status != GL_TRUE) {
         glGetShaderInfoLog(fragment, 512, nullptr, infoLog);
         std::string error = infoLog;
         Logger::log(Logger::ERROR, "Shader", "Failed to load fragment shader due to error: " + error);
@@ -27,7 +27,7 @@ Shader::Shader(LoadType src, const std::string &vsh, const std::string &fsh) : i
     glShaderSource(vertex, 1, &vCode, nullptr);
     glCompileShader(vertex);
     glGetShaderiv(vertex, GL_COMPILE_STATUS, &status);
-    if (!status) {
+    if (status != GL_TRUE) {
         glGetShaderInfoLog(vertex, 512, nullptr, infoLog);
         std::string error = infoLog;
         Logger::log(Logger::ERROR, "Shader", "Failed to compile vertex shader due to error: " + error);
@@ -37,7 +37,7 @@ Shader::Shader(LoadType src, const std::string &vsh, const std::string &fsh) : i
     glShaderSource(fragment, 1, &fCode, nullptr);
     glCompileShader(fragment);
     glGetShaderiv(fragment, GL_COMPILE_STATUS, &status);
-    if (!status) {
+    if (status != GL_TRUE) {
         glGetShaderInfoLog(fragment, 512, nullptr, infoLog);
         std::string error = infoLog;
         Logger::log(Logger::ERROR, "Shader", "Failed to compile fragment shader due to error: " + error);
@@ -47,7 +47,7 @@ Shader::Shader(LoadType src, const std::string &vsh, const std::string &fsh) : i
     glAttachShader(id, fragment);
     glLinkProgram(id);
     glGetShaderiv(id, GL_LINK_STATUS, &status);
-    if (!status) {
+    if (status != GL_TRUE) {
         glGetProgramInfoLog(id, 512, nullptr, infoLog);
         std::string error = infoLog;
         Logger::log(Logger::ERROR, "Shader", "Failed to link shader program due to error: " + error);
@@ -85,11 +85,11 @@ void Shader::setVec4f(const std::string &loc, glm::vec4 val) const {
     glUniform4f(glGetUniformLocation(id, loc.c_str()), val.x, val.y, val.z, val.w);
 }
 void Shader::loadShaderSource(const std::string &filename, std::string &out, int *status) const {
-    *status = 0;
+    *status = GL_TRUE;
     std::ifstream file;
     file.open(filename.c_str());
     if (!file) {
-        *status = 1;
+        *status = GL_FALSE;
         return;
     }
     std::stringstream stream;
