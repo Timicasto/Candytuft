@@ -12,8 +12,15 @@
 class Shader {
 private:
 	unsigned int id;
+	void loadShaderSource(const std::string &filename, std::string &out, int *status) const;
 public:
-	Shader(const std::string& vsh, const std::string& fsh);
+
+	typedef enum LoadType {
+		EXTERNAL_FILE,
+		STRING_CODE
+	} LoadType;
+
+	Shader(LoadType src, const std::string& vsh, const std::string& fsh);
 	void use() const;
 	void setBool(const std::string& loc, bool val) const;
 	void setInt(const std::string& loc, int val) const;
@@ -21,7 +28,6 @@ public:
 	void setVec3f(const std::string& loc, glm::vec3 val) const;
 	void setVec4f(const std::string& loc, glm::vec4 val) const;
     void setMat4f(const std::string& loc, glm::mat4 val) const;
-    void loadShaderSource(const std::string &filename, std::string &out, int *status) const;
 };
 
 

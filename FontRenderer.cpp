@@ -51,6 +51,11 @@ size_t FontRenderer::loadFont(const std::string &path, uint32_t mode, int size) 
 		toLoad.emplace_back(12246, 12352);
 		toLoad.emplace_back(0xFF00, 0xFFEF);
 		toLoad.emplace_back(0x2000, 0x206F);
+		toLoad.emplace_back(0x3040, 0x30FF);
+		toLoad.emplace_back(0x3300, 0x33FF);
+		toLoad.emplace_back(0x20000, 0x323AF);
+		toLoad.emplace_back(0x1AFF0, 0x1B16F);
+		toLoad.emplace_back(0x3000, 0x303F);
 	}
 
 	if ((mode >> 7) % 2)  {
@@ -119,6 +124,10 @@ std::tuple<int, int> FontRenderer::render(size_t font, const std::wstring &text,
 
     float w = x, h = y;
 	for (const auto& item : text) {
+		if ((fonts[font]).find(item) == fonts[font].end()) {
+			Logger::log(Logger::ERROR, "FontRenderer", "Char " + std::to_string(item) + "is not found in font " + std::to_string(font));
+			continue;
+		}
 		RenderableCharacter c = (*((fonts[font]).find(item))).second;
 		GLfloat xPos = x + c.getBearing().x * scale;
         GLfloat yPos = y - (c.getSize().y - c.getBearing().y) * scale;

@@ -9,8 +9,8 @@
 #include "RenderableCharacter.hpp"
 #include "Shader.hpp"
 
-static const std::string defVsh = "./vsh.vert";
-static const std::string defFsh = "./fsh.frag";
+static const std::string defVsh = "./text.vsh";
+static const std::string defFsh = "./text.fsh";
 
 class FontRenderer {
 

@@ -1,7 +1,7 @@
 #include "Shader.hpp"
 #include "logger.hpp"
 
-Shader::Shader(const std::string &vsh, const std::string &fsh) : id(glCreateProgram()) {
+Shader::Shader(LoadType src, const std::string &vsh, const std::string &fsh) : id(glCreateProgram()) {
     unsigned int vertex, fragment;
     int status;
     char infoLog[512];
