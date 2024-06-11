@@ -1,6 +1,6 @@
 #include "FontRenderer.hpp"
 
-FontRenderer::FontRenderer() : FontRenderer(Shader(defVsh, defFsh)) {
+FontRenderer::FontRenderer() : FontRenderer(Shader(Shader::EXTERNAL_FILE, defVsh, defFsh)) {
 
 }
 
