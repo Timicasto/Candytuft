@@ -24,7 +24,7 @@ public:
 	FontRenderer();
 	explicit FontRenderer(Shader shader);
 	size_t loadFont(const std::string& path, uint32_t mode, int size);
-	void render(size_t font, const std::wstring& text, float x, float y, float scale, glm::vec4 color, glm::mat4 projection);
+    std::tuple<int, int> render(size_t font, const std::wstring &text, float x, float y, float scale, glm::vec4 color, glm::mat4 projection);
 };
 
 

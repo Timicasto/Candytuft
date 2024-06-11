@@ -110,27 +110,28 @@ size_t FontRenderer::loadFont(const std::string &path, uint32_t mode, int size) 
 	return fonts.size() - 1;
 }
 
-void FontRenderer::render(size_t font, const std::wstring &text, float x, float y, float scale, glm::vec4 color, glm::mat4 projection) {
+std::tuple<int, int> FontRenderer::render(size_t font, const std::wstring &text, float x, float y, float scale, glm::vec4 color, glm::mat4 projection) {
 	s.use();
 	s.setVec4f("textColor", color);
 	s.setMat4f("projection", projection);
-	glActiveTexture(GL_TEXTURE0);
-	glBindVertexArray(vao);
+    glActiveTexture(GL_TEXTURE0);
+    glBindVertexArray(vao);
 
+    float w = x, h = y;
 	for (const auto& item : text) {
 		RenderableCharacter c = (*((fonts[font]).find(item))).second;
 		GLfloat xPos = x + c.getBearing().x * scale;
-		GLfloat yPos = y - (c.getSize().y - c.getBearing().y) * scale;
-		GLfloat w = c.getSize().x * scale;
-		GLfloat h = c.getSize().y * scale;
+        GLfloat yPos = y - (c.getSize().y - c.getBearing().y) * scale;
+        GLfloat wChar = c.getSize().x * scale;
+        GLfloat hChar = c.getSize().y * scale;
 
 		GLfloat vertices[6][4] = {
-				{xPos, yPos + h, 0.0, 0.0},
+                {xPos, yPos + hChar, 0.0, 0.0},
 				{xPos, yPos, 0.0, 1.0},
-				{xPos + w, yPos, 1.0, 1.0},
-				{xPos, yPos + h, 0.0, 0.0},
-				{xPos + w, yPos, 1.0, 1.0},
-				{xPos + w, yPos + h, 1.0, 0.0}
+                {xPos + wChar, yPos, 1.0, 1.0},
+                {xPos, yPos + hChar, 0.0, 0.0},
+                {xPos + wChar, yPos, 1.0, 1.0},
+                {xPos + wChar, yPos + hChar, 1.0, 0.0}
 		};
 		glBindTexture(GL_TEXTURE_2D, c.getTexId());
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -138,7 +139,10 @@ void FontRenderer::render(size_t font, const std::wstring &text, float x, float 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		x += (c.getAdvance() >> 6) * scale;
-	}
+        w = x + xPos + wChar;
+        h = std::max(h, y + yPos + hChar); // kinda dirty hack
+    }
 	glBindVertexArray(0);
-	glBindTexture(GL_TEXTURE_2D, 0);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    return {static_cast<int>(w), static_cast<int>(h)};
 }
